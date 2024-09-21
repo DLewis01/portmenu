@@ -1,0 +1,82 @@
+#!/bin/bash
+
+while true; do
+    clear
+    echo "=== MacPort Menu ==="
+	echo "1. MacPorts selfupgrade"
+    echo "2. Upgrade outdated ports"
+    echo "3. Upgrade individual outdated ports"
+    echo "4. Uninstall inactive ports"
+    echo "5. List installed ports"
+    echo "6. Search for ports"
+    echo "7. Install ports"
+    echo "8. Clean Ports"
+    echo "9. Uninstall inactive ports"
+	echo "10. Uninstall specific port"
+    echo "q. Exit"
+    echo -n "Enter your choice: "
+    read choice
+
+    case $choice in
+		1)
+			echo "Running 'selfupdate'..."
+			sudo port selfupdate
+			;;
+        2)
+            echo "Running 'sudo port upgrade outdated'..."
+            sudo port upgrade outdated
+            ;;
+        3)
+            echo "Running 'sudo port upgrade' for each outdated port..."
+            for port in $(sudo port outdated | awk '{print $1}'); do
+                sudo port upgrade $port
+            done
+            ;;
+        4)
+            echo "Running 'sudo port uninstall inactive'..."
+            sudo port uninstall inactive
+            ;;
+        5)
+            echo "Running 'ports installed'..."
+            sudo port installed
+            ;;
+        6)
+            echo -n "Enter the search keyword: "
+            read keyword
+            echo "Running 'port search $keyword'..."
+            port search $keyword
+            ;;
+        7)
+            echo -n "Enter the port name to install: "
+            read portname
+            echo "Running 'sudo port install $portname'..."
+            sudo port -N install $portname
+            ;;
+		8)
+			echo "clean ports"
+			sudo port clean --all all
+			;;
+
+		9)
+			echo "removing inactive ports"
+			sudo port uninstall inactive
+			;;
+
+		10)
+			echo -n "Enter the port name to uninstall: "
+			read portname
+			sudo port uninstall $portname
+			;;
+
+        q)
+            echo "Exiting..."
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            ;;
+    esac
+
+    echo -n "Press Enter to continue..."
+    read
+done
