@@ -3,7 +3,7 @@
 while true; do
     clear
     echo "=== MacPort Menu ==="
-	echo "1. MacPorts selfupgrade"
+    echo "1. MacPorts selfupgrade"
     echo "2. Upgrade outdated ports"
     echo "3. Upgrade individual outdated ports"
     echo "4. Uninstall inactive ports"
@@ -12,16 +12,16 @@ while true; do
     echo "7. Install ports"
     echo "8. Clean Ports"
     echo "9. Uninstall inactive ports"
-	echo "10. Uninstall specific port"
+    echo "10. Uninstall specific port"
     echo "q. Exit"
     echo -n "Enter your choice: "
     read choice
 
     case $choice in
-		1)
-			echo "Running 'selfupdate'..."
-			sudo port selfupdate
-			;;
+        1)
+            echo "Running 'selfupdate'..."
+            sudo port selfupdate
+            ;;
         2)
             echo "Running 'sudo port upgrade outdated'..."
             sudo port upgrade outdated
@@ -52,22 +52,19 @@ while true; do
             echo "Running 'sudo port install $portname'..."
             sudo port -N install $portname
             ;;
-		8)
-			echo "clean ports"
-			sudo port clean --all all
-			;;
-
-		9)
-			echo "removing inactive ports"
-			sudo port uninstall inactive
-			;;
-
-		10)
-			echo -n "Enter the port name to uninstall: "
-			read portname
-			sudo port uninstall $portname
-			;;
-
+         8)
+            echo "clean ports"
+            sudo port clean --all all
+            ;;
+         9)
+            echo "removing inactive ports"
+            sudo port uninstall inactive
+            ;;
+         10)
+            echo -n "Enter the port name to uninstall: "
+            read portname
+            sudo port uninstall $portname
+            ;;
         q)
             echo "Exiting..."
             exit 0
